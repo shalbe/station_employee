@@ -8,7 +8,6 @@ import 'package:system_shop/core/database/cache/cache_helper.dart';
 import 'package:system_shop/core/fonts/fonts.dart';
 import 'package:system_shop/core/navigator/navigator.dart';
 import 'package:system_shop/features/home/presentaion/home_cubit/home_cubit.dart';
-import 'package:system_shop/features/home_page/presentaion/screens/home_screen.dart';
 import 'package:system_shop/features/login/presentaion/screens/login_screen/login_screen.dart';
 import 'package:system_shop/features/splash_screen/splash_screen.dart';
 
@@ -25,7 +24,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key});
   static GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
@@ -34,7 +32,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create:(context) => HomePageCubit(),)
+        BlocProvider(
+          create: (context) => HomePageCubit(),
+        )
       ],
       child: ScreenUtilInit(
           designSize: const Size(360, 690),
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               navigatorKey: navKey,
               debugShowCheckedModeBanner: false,
-              title: 'Kalde client',
+              title: 'الجنوبي',
               home: SplashScreen(),
               theme: ThemeData(
                   // backgroundColor: Color(0xffE2E7ED),

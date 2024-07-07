@@ -5,13 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:system_shop/core/colors/colors.dart';
 import 'package:system_shop/core/componant/componant.dart';
-import 'package:system_shop/features/home_page/presentaion/screens/home_screen.dart';
 import 'package:system_shop/features/login/presentaion/cubit/login_cubit.dart';
 import 'package:system_shop/features/login/presentaion/cubit/login_states.dart';
 import 'package:system_shop/features/register/presentaion/screens/login_screen/register_screen.dart';
 import 'package:system_shop/main.dart';
 
-BuildContext context = MyApp.navKey.currentState!.context;
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -180,26 +178,27 @@ class LoginScreen extends StatelessWidget {
                       height: 20.h,
                     ),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        defaultText(
-                            txt: '  ليس لديك حساب     ',
-                            fontSize: 11.sp,
-                            color: Colors.grey.shade500,
-                            fontWeight: FontWeight.bold),
-                        InkWell(
-                          onTap: () {
-                            nextPage(context, RegisterScreen());
-                          },
-                          child: defaultText(
-                              txt: 'تسجيل الحساب',
-                              fontSize: 16.sp,
-                              color: Color(0xff171717),
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   children: [
+                    //     defaultText(
+                    //         txt: '  ليس لديك حساب     ',
+                    //         fontSize: 11.sp,
+                    //         color: Colors.grey.shade500,
+                    //         fontWeight: FontWeight.bold),
+                    //     InkWell(
+                    //       onTap: () {
+                    //         nextPage(context, RegisterScreen());
+                    //       },
+                    //       child: defaultText(
+                    //           txt: 'تسجيل الحساب',
+                    //           fontSize: 16.sp,
+                    //           color: Color(0xff171717),
+                    //           fontWeight: FontWeight.bold),
+                    //     ),
+                    //   ],
+                    // ),
+               
                   ],
                 ),
               ),

@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:system_shop/core/componant/componant.dart';
 import 'package:system_shop/core/database/api/dio_consumer.dart';
 import 'package:system_shop/core/database/api/end_point.dart';
+import 'package:system_shop/features/home/presentaion/screens/home.dart';
 import 'package:system_shop/features/login/data/data_source/remote_data_source.dart';
 import 'package:system_shop/features/login/data/models/login_model.dart';
 import 'package:system_shop/features/login/presentaion/cubit/login_states.dart';
@@ -56,15 +57,9 @@ class RegisterCubit extends Cubit<RegisterStates> {
     int? shopId,
   }) async {
     var formData = FormData.fromMap({
-      "image": await MultipartFile.fromFile(imageSugget!.path,
-          filename: imageSugget!.path, contentType: MediaType('image', 'jpg')),
       "name": nameController.text,
-      "phone": phoneController.text,
       "password": passwordController.text,
-      "address": addressController.text,
       "email": emailController.text,
-      "city_id": cityId,
-      "shop_id": shopId,
     });
     if (formKey.currentState!.validate()) {
       emit(RegisterLoading());
@@ -82,61 +77,5 @@ class RegisterCubit extends Cubit<RegisterStates> {
     }
   }
 
-  Future registerWithout({
-    int? cityId,
-    int? shopId,
-  }) async {
-    var formData = FormData.fromMap({
-      // "image":await MultipartFile.fromFile(imageSugget!.path,
-      //     filename: imageSugget!.path, contentType: MediaType('image', 'jpg')),
-
-      "name": nameController.text,
-      "phone": phoneController.text,
-      "password": passwordController.text,
-      "address": addressController.text,
-      "email": emailController.text,
-      "city_id": cityId,
-      "shop_id": shopId,
-    });
-    if (formKey.currentState!.validate()) {
-      emit(RegisterLoading());
-      DioHelper.postData(path: ApiUrls.REGISTER_URL, data: formData)
-          .then((value) {
-        registerModel = RegisterModel.fromJson(value.data);
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(registerModel!.message.toString())));
-        nextPage(context, LoginScreen());
-        emit(RegisterSuccess(registerModel!.message));
-      }).catchError((er) {
-        print(er.toString());
-        emit(RegisterError());
-      });
-    }
-  }
-
-  getCity() async {
-    emit(GetCityLoading());
-    var city = await RegisterServices.getCity();
-    if (city?.status == true) {
-      cityList = city?.data ?? [];
-      emit(GetCitySuccess());
-    } else if (city?.status == false) {
-      emit(GetCityError());
-    } else {
-      emit(GetCityFailed());
-    }
-  }
-
-  getShops() async {
-    emit(GetShopsLoading());
-    var city = await RegisterServices.getShops();
-    if (city?.status == true) {
-      shopList = city?.data ?? [];
-      emit(GetShopsSuccess());
-    } else if (city?.status == false) {
-      emit(GetShopsError());
-    } else {
-      emit(GetShopsFailed());
-    }
-  }
+ 
 }

@@ -1,16 +1,18 @@
 class LoginModel {
   String? accessToken;
   String? tokenType;
-  int? expiresIn;
-  Client? client;
+  dynamic expiresIn;
+  Employee? employee;
 
-  LoginModel({this.accessToken, this.tokenType, this.expiresIn, this.client});
+  LoginModel({this.accessToken, this.tokenType, this.expiresIn, this.employee});
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     accessToken = json['access_token'];
     tokenType = json['token_type'];
     expiresIn = json['expires_in'];
-    client = json['client'] != null ? new Client.fromJson(json['client']) : null;
+    employee = json['employee'] != null
+        ? new Employee.fromJson(json['employee'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -18,58 +20,46 @@ class LoginModel {
     data['access_token'] = this.accessToken;
     data['token_type'] = this.tokenType;
     data['expires_in'] = this.expiresIn;
-    if (this.client != null) {
-      data['shop'] = this.client!.toJson();
+    if (this.employee != null) {
+      data['employee'] = this.employee!.toJson();
     }
     return data;
   }
 }
 
-class Client {
-  int? id;
-  String? qr;
-  int? status;
-  String? logo;
+class Employee {
+  dynamic id;
   String? name;
   String? email;
+  dynamic emailVerifiedAt;
   String? password;
-  String? phone;
-  String? address;
-  String? location;
-  int? totalSale;
-  int? cityId;
+  dynamic storage;
+  dynamic makeDebit;
+  dynamic getDebit;
   String? createdAt;
   String? updatedAt;
 
-  Client(
+  Employee(
       {this.id,
-      this.qr,
-      this.logo,
-      this.status,
       this.name,
       this.email,
+      this.emailVerifiedAt,
       this.password,
-      this.phone,
-      this.address,
-      this.location,
-      this.totalSale,
-      this.cityId,
+      this.storage,
+      this.makeDebit,
+      this.getDebit,
       this.createdAt,
       this.updatedAt});
 
-  Client.fromJson(Map<String, dynamic> json) {
+  Employee.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    qr = json['qr'];
-    status = json['status'];
-    logo = json['logo'];
     name = json['name'];
     email = json['email'];
+    emailVerifiedAt = json['email_verified_at'];
     password = json['password'];
-    phone = json['phone'];
-    address = json['address'];
-    location = json['location'];
-    totalSale = json['total_sale'];
-    cityId = json['city_id'];
+    storage = json['storage'];
+    makeDebit = json['make_debit'];
+    getDebit = json['get_debit'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -77,17 +67,13 @@ class Client {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['qr'] = this.qr;
-    data['logo'] = this.logo;
     data['name'] = this.name;
-    data['status'] = this.status;
     data['email'] = this.email;
+    data['email_verified_at'] = this.emailVerifiedAt;
     data['password'] = this.password;
-    data['phone'] = this.phone;
-    data['address'] = this.address;
-    data['location'] = this.location;
-    data['total_sale'] = this.totalSale;
-    data['city_id'] = this.cityId;
+    data['storage'] = this.storage;
+    data['make_debit'] = this.makeDebit;
+    data['get_debit'] = this.getDebit;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

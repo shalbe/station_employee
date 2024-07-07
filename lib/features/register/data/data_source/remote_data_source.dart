@@ -32,19 +32,19 @@ class RegisterServices {
     }
   }
 
-  static Future<AllCities?> getCity() async {
-    var response = await dioHelper.get(endpoint: ApiUrls.CITIES_URL);
-    if (response == null) {
-      return null;
-    }
-    return AllCities.fromJson(response.data);
-  }
+  // static Future<AllCities?> getCity() async {
+  //   var response = await dioHelper.get(endpoint: ApiUrls.CITIES_URL);
+  //   if (response == null) {
+  //     return null;
+  //   }
+  //   return AllCities.fromJson(response.data);
+  // }
 
-  static Future<AllShops?> getShops() async {
-    var response = await dioHelper.get(endpoint: ApiUrls.SHOPS_URL);
-    if (response == null) {
-      return null;
-    }
-    return AllShops.fromJson(response.data);
-  }
+  // static Future<AllShops?> getShops() async {
+  //   var response = await dioHelper.get(endpoint: ApiUrls.SHOPS_URL);
+  //   if (response == null) {
+  //     return null;
+  //   }
+  //   return AllShops.fromJson(response.data);
+  // }
 }
