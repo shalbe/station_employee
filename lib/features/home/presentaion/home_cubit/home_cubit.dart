@@ -486,17 +486,16 @@ class HomePageCubit extends Cubit<HomeState> {
     emit(SendCarNumberLoading());
     DioHelper.postData(path: ApiUrls.MAKE_DEBIT_URL, data: formData)
         .then((value) {
-      carPrice.clear();
-      quantity.clear();
-      number.clear();
-      notes.clear();
-
       addCarPriceDebit = AddCarPrice.fromJson(value.data);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(addCarPriceDebit!.msg.toString()),
         ),
       );
+      carPrice.clear();
+      quantity.clear();
+      number.clear();
+      notes.clear();
       getAllCashCount();
       getMateialData();
       getPendingWithdraw();
@@ -561,25 +560,25 @@ class HomePageCubit extends Cubit<HomeState> {
   TextEditingController price = TextEditingController();
 
   loadData() async {
-await getAllCashCount();
-await getMateialData();
-await getPendingWithdraw();
-await getAcceptedWithdraw();
- // getLatestMessage();
-await getSettingsData();
-await getCachInDayCount();
-await getAllSalesCount();
- // getStillDebitCount();
-await getAllDebitInDayCount();
-await getAllPaymentInDayCount();
-await getAllPaymentCount();
- // getClientCar();
-await getAllDebitCount();
-      // getAllMessage();
-await getCashOrder();
-await getPaymentOrder();
-await getDebitOrder();
-await gettotalSalesToDayCount();
+    await getAllCashCount();
+    await getMateialData();
+    await getPendingWithdraw();
+    await getAcceptedWithdraw();
+    // getLatestMessage();
+    await getSettingsData();
+    await getCachInDayCount();
+    await getAllSalesCount();
+    // getStillDebitCount();
+    await getAllDebitInDayCount();
+    await getAllPaymentInDayCount();
+    await getAllPaymentCount();
+    // getClientCar();
+    await getAllDebitCount();
+    // getAllMessage();
+    await getCashOrder();
+    await getPaymentOrder();
+    await getDebitOrder();
+    await gettotalSalesToDayCount();
     // await getTopSales();
     emit(GetPartenerSucsses());
   }

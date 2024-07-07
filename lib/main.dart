@@ -6,9 +6,7 @@ import 'package:system_shop/core/database/api/dio_consumer.dart';
 import 'package:system_shop/core/database/bloc_observer.dart';
 import 'package:system_shop/core/database/cache/cache_helper.dart';
 import 'package:system_shop/core/fonts/fonts.dart';
-import 'package:system_shop/core/navigator/navigator.dart';
 import 'package:system_shop/features/home/presentaion/home_cubit/home_cubit.dart';
-import 'package:system_shop/features/login/presentaion/screens/login_screen/login_screen.dart';
 import 'package:system_shop/features/splash_screen/splash_screen.dart';
 
 void main() async {
