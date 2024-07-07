@@ -14,54 +14,59 @@ class PaymentsOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomePageCubit, HomeState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          HomePageCubit cubit = HomePageCubit.get(context);
-          return Scaffold(
-            body: Padding(
-              padding: EdgeInsets.only(top: 50.h, left: 12.w, right: 12.w),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocProvider(
+      create: (context) => HomePageCubit()..getPaymentOrder(),
+      child: BlocConsumer<HomePageCubit, HomeState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            HomePageCubit cubit = HomePageCubit.get(context);
+            return Scaffold(
+              body: Padding(
+                padding: EdgeInsets.only(top: 50.h, left: 12.w, right: 12.w),
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          pop(context);
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.grey,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          defaultText(
+                              txt: 'سداد الديون ',
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ],
                       ),
-                      defaultText(
-                          txt: 'سداد الديون ',
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      cubit.paymentOrder.isEmpty
+                          ? Center(
+                              child: defaultText(txt: 'لا يوجد طلبات نقدية'),
+                            )
+                          : ListView.separated(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) => GetOrdersPayment(
+                                    data: cubit.paymentOrder[index],
+                                  ),
+                              separatorBuilder: (context, index) => SizedBox(
+                                    height: 15.h,
+                                  ),
+                              itemCount: cubit.paymentOrder.length),
                     ],
                   ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  cubit.paymentOrder.isEmpty
-                      ? Center(
-                          child: defaultText(txt: 'لا يوجد طلبات نقدية'),
-                        )
-                      : ListView.separated(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) => GetOrdersPayment(
-                                data: cubit.paymentOrder[index],
-                              ),
-                          separatorBuilder: (context, index) => SizedBox(
-                                height: 15.h,
-                              ),
-                          itemCount: cubit.paymentOrder.length),
-                ],
+                ),
               ),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }

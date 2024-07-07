@@ -897,7 +897,7 @@ class _HomeState extends State<Home> {
                                                     ),
                                                     defaultText(
                                                       txt: cubit.totalSalesInDay
-                                                          .toString(),
+                                                          .toStringAsFixed(2),
                                                       color: Colors.white,
                                                       fontSize: 30.sp,
                                                       fontWeight:
@@ -933,7 +933,7 @@ class _HomeState extends State<Home> {
                                                     defaultText(
                                                       txt: cubit
                                                           .allCashSalesToDay
-                                                          .toString(),
+                                                          .toStringAsFixed(2),
                                                       color: Colors.white,
                                                       fontSize: 30.sp,
                                                       fontWeight:
@@ -953,8 +953,8 @@ class _HomeState extends State<Home> {
                                         children: [
                                           Expanded(
                                             child: ControllerContainer(
-                                              title:
-                                                  cubit.totalSaless.toString(),
+                                              title: cubit.totalSaless
+                                                  .toStringAsFixed(2),
                                               txt: 'اجمالي المعاملات ',
                                             ),
                                           ),
@@ -963,8 +963,8 @@ class _HomeState extends State<Home> {
                                           ),
                                           Expanded(
                                             child: ControllerContainer(
-                                              title:
-                                                  cubit.allCashSales.toString(),
+                                              title: cubit.allCashSales
+                                                  .toStringAsFixed(2),
                                               txt: 'اجمالي الأموال النقدية',
                                             ),
                                           ),
@@ -981,7 +981,7 @@ class _HomeState extends State<Home> {
                                           Expanded(
                                             child: ControllerContainer(
                                               title: cubit.allDebitSales
-                                                  .toString(),
+                                                  .toStringAsFixed(2),
                                               txt: 'اجمالي المبيعات بالدين',
                                             ),
                                           ),
@@ -990,8 +990,8 @@ class _HomeState extends State<Home> {
                                           ),
                                           Expanded(
                                             child: ControllerContainer(
-                                              title:
-                                                  cubit.allPayments.toString(),
+                                              title: cubit.allPayments
+                                                  .toStringAsFixed(2),
                                               txt: 'اجمالي تسديد الدين',
                                             ),
                                           ),
@@ -1007,7 +1007,7 @@ class _HomeState extends State<Home> {
                                                 color:
                                                     AppColors.buttonGreenColor,
                                                 title: cubit.userData?.storage
-                                                        .toString() ??
+                                                        .toStringAsFixed(2) ??
                                                     ' ',
                                                 txt: 'اجمالي الاموال النقديه '),
                                           ),
@@ -1041,7 +1041,7 @@ class _HomeState extends State<Home> {
                                                     defaultText(
                                                       txt: cubit
                                                           .allDebitSalesToDay
-                                                          .toString(),
+                                                          .toStringAsFixed(2),
                                                       color: Colors.white,
                                                       fontSize: 30.sp,
                                                       fontWeight:
@@ -1077,7 +1077,7 @@ class _HomeState extends State<Home> {
                                                     defaultText(
                                                       txt: cubit
                                                           .allPaymentsToDay
-                                                          .toString(),
+                                                          .toStringAsFixed(2),
                                                       color: Colors.white,
                                                       fontSize: 30.sp,
                                                       fontWeight:
@@ -1171,8 +1171,6 @@ class _HomeState extends State<Home> {
                                       //           ],
                                       //         ),
                                       //       )
-                                   
-                                   
                                     ],
                                   ),
                                   SizedBox(
@@ -1433,8 +1431,157 @@ class _HomeState extends State<Home> {
                           Padding(
                             padding: EdgeInsets.only(
                                 top: 90.h, left: 12.w, right: 12.w),
-                            child: Container(
-                              height: 400.h,
+                            child:
+                                // Container(
+                                //   height: 400.h,
+                                //   width: 320.w,
+                                //   decoration: BoxDecoration(
+                                //       boxShadow: [
+                                //         BoxShadow(
+                                //             offset: Offset(0, 3),
+                                //             color: Colors.grey.shade400,
+                                //             blurRadius: 3,
+                                //             spreadRadius: 3)
+                                //       ],
+                                //       borderRadius: BorderRadius.circular(12),
+                                //       color: Colors.white),
+                                //   child: Padding(
+                                //     padding: EdgeInsets.only(
+                                //         top: 20, left: 12, right: 12),
+                                //     child: SingleChildScrollView(
+                                //       child: Column(
+                                //         crossAxisAlignment: CrossAxisAlignment.end,
+                                //         children: [
+                                //           InkWell(
+                                //               onTap: () {
+                                //                 setState(() {
+                                //                   isDebitSell = false;
+                                //                 });
+                                //               },
+                                //               child: defaultText(
+                                //                 txt: 'الغاء',
+                                //               )),
+                                //           SizedBox(
+                                //             height: 15.h,
+                                //           ),
+                                //           Row(
+                                //             mainAxisAlignment:
+                                //                 MainAxisAlignment.spaceBetween,
+                                //             children: [
+                                //               InkWell(
+                                //                   onTap: () {
+                                //                     scanBarcode();
+                                //                   },
+                                //                   child:
+                                //                       Icon(Icons.qr_code_rounded)),
+                                //               defaultText(
+                                //                 txt: 'سداد دين',
+                                //                 fontSize: 20,
+                                //                 fontWeight: FontWeight.bold,
+                                //               ),
+                                //             ],
+                                //           ),
+                                //           Divider(
+                                //             height: 30.h,
+                                //             color: Colors.grey,
+                                //           ),
+                                //           defaultText(
+                                //               txt: ' رقم العربية',
+                                //               fontSize: 17,
+                                //               fontWeight: FontWeight.bold),
+                                //           SizedBox(
+                                //             height: 15.h,
+                                //           ),
+                                //           TextField(
+                                //             controller: cubit.number,
+                                //             decoration: InputDecoration(
+                                //               contentPadding: EdgeInsets.all(15),
+                                //               border: OutlineInputBorder(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(10),
+                                //                 borderSide:
+                                //                     BorderSide(color: Colors.grey),
+                                //               ),
+                                //               focusedBorder: OutlineInputBorder(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(10),
+                                //                 borderSide:
+                                //                     BorderSide(color: Colors.grey),
+                                //               ),
+                                //               enabledBorder: OutlineInputBorder(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(10),
+                                //                 borderSide:
+                                //                     BorderSide(color: Colors.grey),
+                                //               ),
+                                //             ),
+                                //           ),
+                                //           SizedBox(
+                                //             height: 15.h,
+                                //           ),
+                                //           defaultText(
+                                //               txt: '  مبلغ السداد',
+                                //               fontSize: 17,
+                                //               fontWeight: FontWeight.bold),
+                                //           SizedBox(
+                                //             height: 15.h,
+                                //           ),
+                                //           TextFormField(
+                                //             controller: cubit.amount,
+                                //             decoration: InputDecoration(
+                                //               contentPadding: EdgeInsets.all(15),
+                                //               border: OutlineInputBorder(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(10),
+                                //                 borderSide:
+                                //                     BorderSide(color: Colors.grey),
+                                //               ),
+                                //               focusedBorder: OutlineInputBorder(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(10),
+                                //                 borderSide:
+                                //                     BorderSide(color: Colors.grey),
+                                //               ),
+                                //               enabledBorder: OutlineInputBorder(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(10),
+                                //                 borderSide:
+                                //                     BorderSide(color: Colors.grey),
+                                //               ),
+                                //             ),
+                                //           ),
+                                //           SizedBox(
+                                //             height: 15.h,
+                                //           ),
+                                //           InkWell(
+                                //             onTap: () {
+                                //               setState(() {
+                                //                 isDebitSell = false;
+                                //               });
+                                //               cubit.carNumberDebitSell();
+                                //             },
+                                //             child: Container(
+                                //               padding: EdgeInsets.all(12),
+                                //               alignment: Alignment.center,
+                                //               decoration: BoxDecoration(
+                                //                 color: AppColors.buttonRedColor,
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(10),
+                                //               ),
+                                //               child: defaultText(
+                                //                   txt: 'اتمام',
+                                //                   fontSize: 17,
+                                //                   color: Colors.white,
+                                //                   fontWeight: FontWeight.bold),
+                                //             ),
+                                //           ),
+                                //         ],
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+                                Container(
+                              height: 300.h,
                               width: 320.w,
                               decoration: BoxDecoration(
                                   boxShadow: [
@@ -1449,135 +1596,107 @@ class _HomeState extends State<Home> {
                               child: Padding(
                                 padding: EdgeInsets.only(
                                     top: 20, left: 12, right: 12),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              isDebitSell = false;
-                                            });
-                                          },
-                                          child: defaultText(
-                                            txt: 'الغاء',
-                                          )),
-                                      SizedBox(
-                                        height: 15.h,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          InkWell(
-                                              onTap: () {
-                                                scanBarcode();
-                                              },
-                                              child:
-                                                  Icon(Icons.qr_code_rounded)),
-                                          defaultText(
-                                            txt: 'سداد دين',
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ],
-                                      ),
-                                      Divider(
-                                        height: 30.h,
-                                        color: Colors.grey,
-                                      ),
-                                      defaultText(
-                                          txt: ' رقم العربية',
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
-                                      SizedBox(
-                                        height: 15.h,
-                                      ),
-                                      TextField(
-                                        controller: cubit.number,
-                                        decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.all(15),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide:
-                                                BorderSide(color: Colors.grey),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide:
-                                                BorderSide(color: Colors.grey),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide:
-                                                BorderSide(color: Colors.grey),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 15.h,
-                                      ),
-                                      defaultText(
-                                          txt: '  مبلغ السداد',
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
-                                      SizedBox(
-                                        height: 15.h,
-                                      ),
-                                      TextFormField(
-                                        controller: cubit.amount,
-                                        decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.all(15),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide:
-                                                BorderSide(color: Colors.grey),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide:
-                                                BorderSide(color: Colors.grey),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide:
-                                                BorderSide(color: Colors.grey),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 15.h,
-                                      ),
-                                      InkWell(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    InkWell(
                                         onTap: () {
                                           setState(() {
                                             isDebitSell = false;
                                           });
-                                          cubit.carNumberDebitSell();
                                         },
-                                        child: Container(
-                                          padding: EdgeInsets.all(12),
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.buttonRedColor,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: defaultText(
-                                              txt: 'اتمام',
-                                              fontSize: 17,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
+                                        child: defaultText(
+                                          txt: 'الغاء',
+                                        )),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                            onTap: () {
+                                              scanBarcode();
+                                            },
+                                            child: Icon(Icons.qr_code_rounded)),
+                                        defaultText(
+                                          txt: 'سداد دين',
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      height: 30.h,
+                                      color: Colors.grey,
+                                    ),
+                                    defaultText(
+                                        txt: 'ادخل رقم العربية',
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    TextField(
+                                      controller: cubit.number,
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(15),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide:
+                                              BorderSide(color: Colors.grey),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide:
+                                              BorderSide(color: Colors.grey),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide:
+                                              BorderSide(color: Colors.grey),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        cubit.carNumberDebits();
+                                        // if (state is CarNumberDebitSucsses) {
+                                        //   nextPage(
+                                        //       context,
+                                        //       BlocProvider.value(
+                                        //           value: cubit,
+                                        //           child: CarsDetailsDebit(
+                                        //             carId: cubit.number.text,
+                                        //           )));
+                                        // }
+                                        setState(() {
+                                          isDebitSell = false;
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.all(12),
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.buttonRedColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: defaultText(
+                                            txt: 'اتمام',
+                                            fontSize: 17,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

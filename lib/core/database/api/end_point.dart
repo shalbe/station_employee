@@ -51,7 +51,9 @@ class ApiUrls {
   // SCAN CLIENT
   static String SCAN_CLIENT_URL = 'dashboard/search-cash-car';
   static String SCAN_DEBIT_URL = 'dashboard/search-debit-car';
+  static String PAYMENT_CAR_URL = 'dashboard/search-Payment-car';
   static String MAKE_PAYMENT_URL = 'dashboard/make-payment';
+  static String UPDATE_PAYMENT_URL = 'dashboard/update-payment';
   static String MAKE_WITHDRAW_URL = 'dashboard/make-withdraw';
   static String SCAN_URL = 'client/scan-shop';
   static String MAKE_CASH_URL = 'dashboard/make-cash-order';

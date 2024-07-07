@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:system_shop/core/colors/colors.dart';
 import 'package:system_shop/core/componant/componant.dart';
 import 'package:system_shop/features/home/data/model/cach_order.dart';
 import 'package:system_shop/features/home/data/model/get_payment_order.dart';
+import 'package:system_shop/features/home/presentaion/home_cubit/home_cubit.dart';
+import 'package:system_shop/features/home/presentaion/screens/car_details_sales_update.dart';
 
 class GetOrdersPayment extends StatelessWidget {
   PaymentOrderData? data;
@@ -59,19 +62,19 @@ class GetOrdersPayment extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Row(
-                //   children: [
-                //     defaultText(
-                //         txt: 'اجمالي الطلب',
-                //         fontSize: 12,
-                //         fontWeight: FontWeight.bold),
-                //     defaultText(
-                //         txt: '  ${data!.total}  ',
-                //         fontSize: 10,
-                //         color: AppColors.textColor,
-                //         fontWeight: FontWeight.bold),
-                //   ],
-                // ),
+                Row(
+                  children: [
+                    defaultText(
+                        txt: ' المبلغ المسدد',
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
+                    defaultText(
+                        txt: '  ${data!.amount}  ',
+                        fontSize: 10,
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.bold),
+                  ],
+                ),
                 Row(
                   children: [
                     defaultText(
@@ -106,6 +109,34 @@ class GetOrdersPayment extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ],
                 ),
+
+                InkWell(
+                  onTap: () {
+                    nextPage(
+                        context,
+                        BlocProvider.value(
+                          value: context.read<HomePageCubit>(),
+                          child: CarsDetailsSalesUpdate(
+                            id: data!.id,
+                            number: data!.carNumber,
+                            empName: data!.clientName,
+                            amount: data!.amount,
+                          ),
+                        ));
+                  },
+                  child: Container(
+                    height: 30.h,
+                    width: 30.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(7),
+                        border: Border.all(width: .2),
+                        color: Colors.white),
+                    child: Icon(
+                      Icons.edit,
+                      size: 18,
+                    ),
+                  ),
+                )
                 // Row(
                 //   children: [
                 //     defaultText(

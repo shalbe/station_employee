@@ -73,7 +73,8 @@ class DashBoardScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                     defaultText(
-                                      txt: cubit.totalSalesInDay.toString(),
+                                      txt: cubit.totalSalesInDay
+                                          .toStringAsFixed(2),
                                       color: Colors.white,
                                       fontSize: 30.sp,
                                       fontWeight: FontWeight.bold,
@@ -103,7 +104,8 @@ class DashBoardScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                     defaultText(
-                                      txt: cubit.allCashSalesToDay.toString(),
+                                      txt: cubit.allCashSalesToDay
+                                          .toStringAsFixed(2),
                                       color: Colors.white,
                                       fontSize: 30.sp,
                                       fontWeight: FontWeight.bold,
@@ -122,7 +124,7 @@ class DashBoardScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ControllerContainer(
-                              title: cubit.totalSaless.toString(),
+                              title: cubit.totalSaless.toStringAsFixed(2),
                               txt: 'اجمالي المعاملات ',
                             ),
                           ),
@@ -131,7 +133,7 @@ class DashBoardScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: ControllerContainer(
-                              title: cubit.allCashSales.toString(),
+                              title: cubit.allCashSales.toStringAsFixed(2),
                               txt: 'اجمالي الأموال النقدية',
                             ),
                           ),
@@ -147,7 +149,7 @@ class DashBoardScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ControllerContainer(
-                              title: cubit.allDebitSales.toString(),
+                              title: cubit.allDebitSales.toStringAsFixed(2),
                               txt: 'اجمالي المبيعات بالدين',
                             ),
                           ),
@@ -156,7 +158,7 @@ class DashBoardScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: ControllerContainer(
-                              title: cubit.allPayments.toString(),
+                              title: cubit.allPayments.toStringAsFixed(2),
                               txt: 'اجمالي تسديد الدين',
                             ),
                           ),
@@ -170,8 +172,9 @@ class DashBoardScreen extends StatelessWidget {
                           Expanded(
                             child: ControllerContainer(
                                 color: AppColors.buttonGreenColor,
-                                title:
-                                    cubit.userData?.storage.toString() ?? ' ',
+                                title: cubit.userData?.storage
+                                        .toStringAsFixed(2) ??
+                                    ' ',
                                 txt: 'اجمالي الاموال النقديه '),
                           ),
                         ],
@@ -198,7 +201,8 @@ class DashBoardScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                     defaultText(
-                                      txt: cubit.allDebitSalesToDay.toString(),
+                                      txt: cubit.allDebitSalesToDay
+                                          .toStringAsFixed(2),
                                       color: Colors.white,
                                       fontSize: 30.sp,
                                       fontWeight: FontWeight.bold,
@@ -228,7 +232,8 @@ class DashBoardScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                     defaultText(
-                                      txt: cubit.allPaymentsToDay.toString(),
+                                      txt: cubit.allPaymentsToDay
+                                          .toStringAsFixed(2),
                                       color: Colors.white,
                                       fontSize: 30.sp,
                                       fontWeight: FontWeight.bold,

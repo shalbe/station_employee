@@ -28,6 +28,7 @@ import 'package:system_shop/features/home/data/model/user_profile.dart';
 import 'package:system_shop/features/home/presentaion/home_cubit/home_state.dart';
 import 'package:system_shop/features/home/presentaion/screens/car_details.dart';
 import 'package:system_shop/features/home/presentaion/screens/car_details_debit.dart';
+import 'package:system_shop/features/home/presentaion/screens/car_details_sales.dart';
 import 'package:system_shop/features/home/presentaion/screens/home.dart';
 import 'package:system_shop/features/home/presentaion/screens/not_found.dart';
 import 'package:system_shop/main.dart';
@@ -304,10 +305,39 @@ class HomePageCubit extends Cubit<HomeState> {
     });
   }
 
+  carNumberDebits() {
+    var formData = FormData.fromMap({"number": number.text});
+    emit(CarNumberDebitLoading());
+    DioHelper.postData(path: ApiUrls.PAYMENT_CAR_URL, data: formData)
+        .then((value) {
+      carDebit = CarDetails.fromJson(value.data);
+
+      log('===============================${carDebit!.data!.materialName}');
+      nextPage(
+          context,
+          CarsDetailsSales(
+            carId: carDebit!.data!.id,
+            carDetails: carDebit,
+            data: getMaterials,
+          ));
+      // number.clear();
+
+      emit(CarNumberDebitSucsses());
+    }).catchError((er) {
+      print(er.toString());
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(carDebit!.msg.toString()),
+        ),
+      );
+      emit(CarNumberDebitError());
+    });
+  }
+
   SellDebit? sellDebit;
-  carNumberDebitSell() {
+  carNumberDebitSell(String? number) {
     var formData = FormData.fromMap({
-      "number": number.text,
+      "number": number,
       "amount": amount.text,
     });
     emit(CarNumberSellDebitLoading());
@@ -315,14 +345,14 @@ class HomePageCubit extends Cubit<HomeState> {
         .then((value) {
       sellDebit = SellDebit.fromJson(value.data);
 
-      log('===============================${sellDebit!.msg}');
+      log('===============================${number}');
       // nextPage(
       //     context,
       //     CarsDetails(
       //       carDetails: carDetails,
       //       data: getMaterials,
       //     ));
-      number.clear();
+
       amount.clear();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -333,22 +363,72 @@ class HomePageCubit extends Cubit<HomeState> {
       getMateialData();
       getPendingWithdraw();
       getAcceptedWithdraw();
-      // getLatestMessage();
+
       getSettingsData();
       getCachInDayCount();
       getAllSalesCount();
-      // getStillDebitCount();
+
       getAllDebitInDayCount();
       getAllPaymentInDayCount();
       getAllPaymentCount();
-      // getClientCar();
+
       getAllDebitCount();
-      // getAllMessage();
+
       getCashOrder();
       getPaymentOrder();
       getDebitOrder();
       gettotalSalesToDayCount();
 
+      emit(CarNumberSellDebitSucsses());
+    }).catchError((er) {
+      print(er.toString());
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(carDebit!.msg.toString()),
+        ),
+      );
+      emit(CarNumberSellDebitError());
+    });
+  }
+
+  carNumberDebitSellUpdate({String? number, int? id}) {
+    var formData =
+        FormData.fromMap({"number": number, "amount": amount.text, "id": id});
+    emit(CarNumberSellDebitLoading());
+    DioHelper.postData(path: ApiUrls.UPDATE_PAYMENT_URL, data: formData)
+        .then((value) {
+      sellDebit = SellDebit.fromJson(value.data);
+
+      log('===============================${number}');
+
+      amount.clear();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(sellDebit!.msg.toString()),
+        ),
+      );
+      getAllCashCount();
+      getMateialData();
+      getPaymentOrder();
+
+      getPendingWithdraw();
+      getAcceptedWithdraw();
+
+      getSettingsData();
+      getCachInDayCount();
+      getAllSalesCount();
+
+      getAllDebitInDayCount();
+      getAllPaymentInDayCount();
+      getAllPaymentCount();
+
+      getAllDebitCount();
+
+      getCashOrder();
+      getPaymentOrder();
+      getDebitOrder();
+      gettotalSalesToDayCount();
+      pop(context);
       emit(CarNumberSellDebitSucsses());
     }).catchError((er) {
       print(er.toString());
@@ -486,17 +566,16 @@ class HomePageCubit extends Cubit<HomeState> {
     emit(SendCarNumberLoading());
     DioHelper.postData(path: ApiUrls.MAKE_DEBIT_URL, data: formData)
         .then((value) {
-      carPrice.clear();
-      quantity.clear();
-      number.clear();
-      notes.clear();
-
       addCarPriceDebit = AddCarPrice.fromJson(value.data);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(addCarPriceDebit!.msg.toString()),
         ),
       );
+      carPrice.clear();
+      quantity.clear();
+      number.clear();
+      notes.clear();
       getAllCashCount();
       getMateialData();
       getPendingWithdraw();
@@ -561,25 +640,25 @@ class HomePageCubit extends Cubit<HomeState> {
   TextEditingController price = TextEditingController();
 
   loadData() async {
-await getAllCashCount();
-await getMateialData();
-await getPendingWithdraw();
-await getAcceptedWithdraw();
- // getLatestMessage();
-await getSettingsData();
-await getCachInDayCount();
-await getAllSalesCount();
- // getStillDebitCount();
-await getAllDebitInDayCount();
-await getAllPaymentInDayCount();
-await getAllPaymentCount();
- // getClientCar();
-await getAllDebitCount();
-      // getAllMessage();
-await getCashOrder();
-await getPaymentOrder();
-await getDebitOrder();
-await gettotalSalesToDayCount();
+    await getAllCashCount();
+    await getMateialData();
+    await getPendingWithdraw();
+    await getAcceptedWithdraw();
+    // getLatestMessage();
+    await getSettingsData();
+    await getCachInDayCount();
+    await getAllSalesCount();
+    // getStillDebitCount();
+    await getAllDebitInDayCount();
+    await getAllPaymentInDayCount();
+    await getAllPaymentCount();
+    // getClientCar();
+    await getAllDebitCount();
+    // getAllMessage();
+    await getCashOrder();
+    await getPaymentOrder();
+    await getDebitOrder();
+    await gettotalSalesToDayCount();
     // await getTopSales();
     emit(GetPartenerSucsses());
   }
